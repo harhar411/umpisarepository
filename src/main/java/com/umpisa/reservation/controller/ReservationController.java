@@ -93,8 +93,8 @@ public class ReservationController {
         return new ResponseEntity<>(reservationService.getAllReservations(), HttpStatus.OK);
     }
 
-    @GetMapping(path = "/cancel")
-    public ResponseEntity<Object> cancelReservation(@RequestParam("reservationId") UUID uuid) {
+    @DeleteMapping(path = "/cancel/{reservationId}")
+    public ResponseEntity<Object> cancelReservation(@PathVariable("reservationId") UUID uuid) {
         reservationService.cancelReservation(uuid);
         return new ResponseEntity<>(new ResponseDto("Reservation of id : " + uuid + " has been cancelled."), HttpStatus.OK);
     }
