@@ -47,7 +47,7 @@ public class ReservationController {
     @Value("${twilio.phone.num}")
     private String twilioPhone;
 
-    @PostMapping(path = "/createReservation", consumes = {MediaType.APPLICATION_JSON_VALUE},
+    @PostMapping(path = "/create", consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<Object> createReservation(@RequestBody Reservation reservation) {
         LocalDateTime now = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
@@ -93,7 +93,7 @@ public class ReservationController {
         return new ResponseEntity<>(reservationService.getAllReservations(), HttpStatus.OK);
     }
 
-    @GetMapping(path = "/cancelReservation")
+    @GetMapping(path = "/cancel")
     public ResponseEntity<Object> cancelReservation(@RequestParam("reservationId") UUID uuid) {
         reservationService.cancelReservation(uuid);
         return new ResponseEntity<>(new ResponseDto("Reservation of id : " + uuid + " has been cancelled."), HttpStatus.OK);
